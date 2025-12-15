@@ -1,0 +1,6 @@
+rootProject.name = "GearOps-Digital-Commerce-Platform"
+
+include 'discovery-server'
+include 'api-gateway'
+include 'auth-service'
+include 'user-service'

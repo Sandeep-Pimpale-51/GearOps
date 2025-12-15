@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Auth_Service
+
+server:
+  port: 8082
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  register-with-eureka: true
+  fetch-registry: true
