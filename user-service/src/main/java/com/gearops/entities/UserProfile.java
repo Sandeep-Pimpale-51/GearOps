@@ -1,15 +1,19 @@
 package com.gearops.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude ="addresses" )
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "user_profile")
 public class UserProfile {
@@ -40,4 +44,13 @@ public class UserProfile {
 
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
+
+    @OneToMany(
+            mappedBy = "userProfile",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference  // Add this
+    @JsonIgnoreProperties("userProfile")
+    private List<UserAddress> addresses = new ArrayList<>();
 }

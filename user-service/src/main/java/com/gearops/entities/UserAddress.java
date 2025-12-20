@@ -1,13 +1,14 @@
 package com.gearops.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "userProfile")
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "user_address")
 public class UserAddress {
@@ -20,6 +21,7 @@ public class UserAddress {
     // Owning side of the relationship to UserProfile
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_profile_id", nullable = false)
+    @JsonIgnoreProperties("addresses")
     private UserProfile userProfile;
 
     @Column(name = "line1", nullable = false, length = 255)
@@ -38,7 +40,7 @@ public class UserAddress {
     private String country;
 
     @Column(name = "postal_code", length = 20)
-    private String postalCode;   // keep as String, not Integer
+    private String postalCode;
 
     @Column(name = "is_default", nullable = false)
     private Boolean isDefault;

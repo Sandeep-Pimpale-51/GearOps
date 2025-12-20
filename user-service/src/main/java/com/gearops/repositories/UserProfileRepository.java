@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
+    boolean existsByEmail(String email);
     // add custom query methods here, e.g.:
     // Optional<UserProfile> findByEmail(String email);
 }
